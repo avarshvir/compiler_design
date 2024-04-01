@@ -19,7 +19,7 @@ bool isPunctuator(char ch)					//check if the given character is a punctuator or
         }
     return false;
 }
-
+/*
 bool validIdentifier(char* str)						//check if the given identifier is valid or not
 {
     if (str[0] == '0' || str[0] == '1' || str[0] == '2' ||
@@ -45,7 +45,18 @@ bool validIdentifier(char* str)						//check if the given identifier is valid or
     }
     }
     return true;
+}*/
+
+bool validIdentifier(const char* str) {
+    if (!isalpha(str[0]) && str[0] != '_')
+        return false; // First character must be a letter or underscore
+    for (int i = 1; str[i] != '\0'; i++) {
+        if (!isalnum(str[i]) && str[i] != '_')
+            return false; // Subsequent characters must be alphanumeric or underscore
+    }
+    return true;
 }
+
 
 bool isOperator(char ch)							//check if the given character is an operator or not
 {
@@ -57,7 +68,7 @@ bool isOperator(char ch)							//check if the given character is an operator or 
     }
     return false;
 }
-
+/*
 bool isKeyword(char *str)						//check if the given substring is a keyword or not
 {
     if (!strcmp(str, "if") || !strcmp(str, "else") ||
@@ -82,8 +93,28 @@ bool isKeyword(char *str)						//check if the given substring is a keyword or no
     {
        return false;
     }
-}
+}*/
+bool isKeyword(const char *str) {
+    const char* keywords[] = {
+        "if", "else", "while", "do", "break", "continue",
+        "int", "double", "float", "return", "char", "case",
+        "long", "short", "typedef", "switch", "unsigned", "void",
+        "static", "struct", "sizeof", "long", "volatile", "typedef",
+        "enum", "const", "union", "extern", "bool"
+    };
 
+    for (const char* keyword : keywords) {
+        int i = 0;
+        while (str[i] && keyword[i] && str[i] == keyword[i]) {
+            i++;
+        }
+        if (str[i] == '\0' && keyword[i] == '\0') {
+            return true; // Strings match
+        }
+    }
+    
+    return false; // No match found
+}
 bool isNumber(char* str)							//check if the given substring is a number or not
 {
     int i, len = strlen(str),numOfDecimal = 0;
