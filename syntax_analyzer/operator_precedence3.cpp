@@ -4,8 +4,8 @@ using namespace std;
 
 // finding precedence using arrays
 //const int MAX_OPERATORS = 4; 
-const char operators[4] = {'+', '-', '*', '/'};
-const int precedence[4] = {1, 1, 2, 2};
+//const char operators[MAX_OPERATORS] = {'+', '-', '*', '/'};
+//const int precedence[MAX_OPERATORS] = {1, 1, 2, 2};
 
 bool isOperator(char c) {
     /*
@@ -15,8 +15,11 @@ bool isOperator(char c) {
         }
     }
     return false;*/
-    if(c == '+' || c == '-' || c == '*' || c == '/'){
-        return true;
+    if(c == '+' || c == '-'){
+        return 1;
+    } 
+    if(c == '*' || c == '/'){
+        return 2;
     }
     else{
         return false;
